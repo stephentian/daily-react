@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Props</title>
+  <script src='../build/react.development.js'></script>
+  <script src='../build/react-dom.development.js'></script>
+  <script src='../build/babel.min.js'></script>
+</head>
+
+<body>
+  <div id="example"></div>
+  <script type="text/babel">
+  // 组件内具有属性, 这些属性在 React 中称为 "props"
+  // 可以使用 this.props.[attribute] 去访问它们
+
+  // this.props 对象属性都与组件的属性一一对应
+  // this.props.children 例外, 它表示组件的所有子节点
+  // this.props.children 的值有三种可能：
+  // 1. undefined 组件没有子节点
+  // 2. object 有一个子节点
+  // 3. array 有多个子节点
+  // 所以处理 this.props.children 要小心
+  // React 提供一个工具方法 React.Children 来处理 this.props.children
+  // 使用 React.Children.map 来遍历子节点, 不用担心 this.props.children 的数据类型
+
+    class NotesList extends React.Component {
+      render() {
+        return (
+          <ol>
+            {
+              React.Children.map(this.props.children, function (child) {
+                return <li>{child}</li>;
+              })
+            }
+          </ol>
+        );
+      }
+    }
+
+    ReactDOM.render(
+      <NotesList>
+        <span>hello</span>
+        <span>stephen</span>
+      </NotesList>,
+      document.getElementById('example')
+    );
+  </script>
+</body>
+
+</html>

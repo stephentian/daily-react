@@ -14,6 +14,29 @@
 <body>
   <div id="example"></div>
   <script type="text/babel">
+    // 有 3 种创建组件的方法
+    // 1. 无状态函数组件
+    // 2. es5 原生方式 React.creatClass 定义组件
+    // 3. es6 形式 extends React.Component 定义组件
+
+    // 1. 函数式组件
+    // function HelloMessage(props, /*contxt*/) {
+    //   return <div>Hello, {props.name}
+    // }
+    
+    // 2. es5
+    // React.creatClass 是 react 刚开始推荐创建组件的方式, 现在被抛弃了
+    // var HelloMessage = React.creatClass({
+    //   propTypes: {},
+    //   render: function () {
+    //     return (
+    //       <div>Hello, Component</div>
+    //     )
+    //   }
+    // })
+
+    // 3. es6
+
     class HelloMessage extends React.Component{
       render() {
         return <h1>Hello {this.props.name}</h1>;
