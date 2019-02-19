@@ -9,11 +9,14 @@
   <script src='../build/react.development.js'></script>
   <script src='../build/react-dom.development.js'></script>
   <script src='../build/babel.min.js'></script>
+  <script src="../build/prop-types.js"></script>
 </head>
 
 <body>
   <div id="example"></div>
   <script type="text/babel">
+  // props
+
   // 组件内具有属性, 这些属性在 React 中称为 "props"
   // 可以使用 this.props.[attribute] 去访问它们
 
@@ -41,11 +44,49 @@
       }
     }
 
+  // propTypes
+
+  // props 可以接收任何值，字符串、对象、函数等等
+  // 但有时不希望用户可以自由地将任何内容输入到组件中
+  // React 提供 PropTypes 来验证 props
+  // PropTypes 告诉  React, title 是 必需的, 并且它的值为 string
+
+  var data = '123 stephen';
+
+  class MyTitle extends React.Component {
+    static propTypes = {
+      title: PropTypes.string.isRequired,
+    }
+    render() {
+      return <h1>{this.props.title}</h1>;
+    }
+  }
+
+  // defaultProps
+  // 如果你想给 props 设置一个默认值, 使用 defaultProps
+
+  class Mytitle extends React.Component {
+    constructor(props) {
+      super(props)
+    }
+    static defaultProps = {
+      title: 'hello defaultProps',
+    }
+    render() {
+      return <h1>{this.props.title}</h1>
+    }
+  }
+
     ReactDOM.render(
-      <NotesList>
-        <span>hello</span>
-        <span>stephen</span>
-      </NotesList>,
+      <div>
+        <NotesList>
+          <span>hello</span>
+          <span>stephen</span>
+        </NotesList>
+        <MyTitle title={data}></MyTitle>
+        <Mytitle/>
+      </div>
+      ,
       document.getElementById('example')
     );
   </script>
