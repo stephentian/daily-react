@@ -20,8 +20,29 @@
         this.state = {
           liked: false
         }
+        this.handleClick = this.handleClick.bind(this)
+        // this.handleClick = this.state.liked ? 'like' : 'haven\'t liked';
+      }
+      handleClick(event) {
+        this.setState({ liked: !this.state.liked });
+      }
+      render() {
+        var text = this.state.liked ? 'liked' : 'haven\'t liked';
+        return (
+          <div>
+            <p>
+              You {text} this.
+            </p>
+            <button onClick = {this.handleClick}>Click to toggle</button>
+          </div>
+        )
       }
     }
+
+    ReactDOM.render(
+      <LikeButton/>,
+      document.getElementById('example')
+    )
   </script>
 </body>
 
