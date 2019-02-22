@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="example"></div>
+  <script>
+    class Human {
+      constructor(height, width) {
+        this.name = 'human';
+        this.height = height;
+        this.width = width;
+      }
+      sayName() {
+        console.log('Hi, my name is ', this.name + '.')
+      }
+    }
+
+    class Male extends Human {
+      constructor(length) {
+        super(length, length);
+        this.height = length + 1;
+        this.name = 'stephen';
+      }
+      get area() {
+        console.log(this.height * this.width)
+        // return this.height * this.width;
+      }
+      set area(value) {
+        this.value = value;
+      }
+    }
+
+    var stephen = new Male(10);
+    stephen.sayName()
+    stephen.area
+  </script>
+</body>
+
+</html>
