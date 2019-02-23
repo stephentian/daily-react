@@ -14,6 +14,23 @@
 <body>
   <div id="example"></div>
   <script type="text/babel">
+  // 组件生命周期
+  // 1. Mounting(being insterted into the DOM)
+  // 2. Updating(being re-rendered)
+  // 3. Ummounting(being removed from the DOM)
+
+  // will 方法发生在事件之前调用
+  // did 方法发生在事件之后调用
+
+  // 完整的生命周期方法列表:
+  // componentWillMount()
+  // componentDidMount()
+  // componentWillUpdate(ObjectNextProps, ObjectNextState)
+  // componentDidUpdate(ObjectNextProps, ObjectNextState)
+  // componentWillUmmount()
+  // componentWillReceiveProps(object nextProps)
+  // shouldCoumponentUpdate(ObjectNextProps, ObjectNextState)
+
     class Hello extends React.Component {
       constructor(props) {
         super(props)
@@ -32,7 +49,7 @@
           this.setState({
             opacity: opacity
           })
-        },bind(this), 100)
+        }.bind(this), 100)
       }
       render() {
         return (
@@ -43,7 +60,7 @@
       }
     }
 
-    ReactDom.render(
+    ReactDOM.render(
       <Hello name = "Stephen"/>,
       document.getElementById('example')
     )
