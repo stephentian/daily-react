@@ -5,41 +5,48 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Lifecycle</title>
+  <script src="../build/react.development.js"></script>
+  <script src="../build/react-dom.development.js"></script>
+  <script src="../build/babel.min.js"></script>
 </head>
 
 <body>
   <div id="example"></div>
-  <script>
-    class Human {
-      constructor(height, width) {
-        this.name = 'human';
-        this.height = height;
-        this.width = width;
+  <script type="text/babel">
+    class Hello extends React.Component {
+      constructor(props) {
+        super(props)
+        this.state = {
+          opacity: 1.0
+        }
       }
-      sayName() {
-        console.log('Hi, my name is ', this.name + '.')
+
+      componentDidMount() {
+        this.timer = setInterval(function () {
+          var opacity = this.state.opacity;
+          opacity -= .05;
+          if (opacity < 0.1) {
+            opacity = 1.0
+          }
+          this.setState({
+            opacity: opacity
+          })
+        },bind(this), 100)
+      }
+      render() {
+        return (
+          <div style={{opacity: this.state.opacity}}>
+            Hello {this.props.name}
+          </div>
+        )
       }
     }
 
-    class Male extends Human {
-      constructor(length) {
-        super(length, length);
-        this.height = length + 1;
-        this.name = 'stephen';
-      }
-      get area() {
-        console.log(this.height * this.width)
-        // return this.height * this.width;
-      }
-      set area(value) {
-        this.value = value;
-      }
-    }
-
-    var stephen = new Male(10);
-    stephen.sayName()
-    stephen.area
+    ReactDom.render(
+      <Hello name = "Stephen"/>,
+      document.getElementById('example')
+    )
   </script>
 </body>
 
