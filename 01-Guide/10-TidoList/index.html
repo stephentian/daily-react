@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>React todo-list</title>
+  <script src='../build/react.development.js'></script>
+  <script src='../build/react-dom.development.js'></script>
+  <script src='../build/babel.min.js'></script>
+</head>
+
+<body>
+  <div id="example"></div>
+  <script type="text/babel">
+    let data = [
+      { id: 0, text: '天气不错哦!!!', complete: false },
+      { id: 1, text: '天气不错哦!!!', complete: false },
+      { id: 2, text: '出去玩啊!!!', complete: true },
+    ]
+
+    class TodoForm extends React.component {
+      constructor(props) {
+        super(props)
+        this.style = {
+          width: 200,
+          display: 'inline-block',
+          marginRight: 10,
+          verticalAlign: 'top'
+        }
+      }
+      render() {
+        return (
+          <form className="main reply form">
+            <div className="field" style={this.style}>
+              <input type="text" placeholder="todo" ref="text" />
+            </div>
+            <button type="submit" className="main button">
+              添加
+            </button>
+          </form>
+        )
+      }
+    }
+
+    class TodoList extends React.Component {
+      constructor(props) {
+        super(props)
+      }
+      render() {
+        const a = this.props.data.map(({ id, text, complete }, index) => {
+          return 
+            <TodoItem key={index} id={id} text={text} complete={complete} />
+        })
+        return (
+          <div>{ a }</div>
+        )
+      }
+    }
+
+    class Todo extends React.Component {
+      constructor(props) {
+        super(props)
+        this.chooseValue = 1
+        this.data = this.props.data
+      }
+      render() {
+        return (
+          <div className="main comments">
+            <h1>React TodoList</h1>
+            <div className="main divider"></div>
+            <TodoForm />
+            <TodoList data={data} />
+            <TodoFooter />
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(
+      <Todo data={data} />,
+      document.getElementById('example')
+    )
+  </script>
+</body>
+
+</html>
