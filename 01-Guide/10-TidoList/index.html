@@ -9,6 +9,26 @@
   <script src='../build/react.development.js'></script>
   <script src='../build/react-dom.development.js'></script>
   <script src='../build/babel.min.js'></script>
+  <style>
+    .active {
+      color: red
+    }
+
+    .line {
+      display: inline-block;
+      border-bottom: 1px solid #222222;
+      width: 100px;
+      position: absolute;
+      left: 0;
+      top: 7px;
+    }
+
+    .ui.comments .comment {
+      padding: 0;
+      margin: 2em 0 0;
+    }
+
+  </style>
 </head>
 
 <body>
@@ -20,20 +40,22 @@
       { id: 2, text: '出去玩啊!!!', complete: true },
     ]
 
-    class TodoForm extends React.component {
+    class TodoForm extends React.Component {
       constructor(props) {
         super(props)
-        this.style = {
-          width: 200,
-          display: 'inline-block',
-          marginRight: 10,
-          verticalAlign: 'top'
+        this.state = {
+          style: {
+            width: 200,
+            display: 'inline-block',
+            marginRight: 10,
+            verticalAlign: 'top'
+          }
         }
       }
       render() {
         return (
           <form className="main reply form">
-            <div className="field" style={this.style}>
+            <div className="field" style={this.state.style}>
               <input type="text" placeholder="todo" ref="text" />
             </div>
             <button type="submit" className="main button">
@@ -44,17 +66,117 @@
       }
     }
 
+    // 智能组件 Smart Component
     class TodoList extends React.Component {
       constructor(props) {
         super(props)
+        this.state = {
+          data: [
+            { id: 0, text: '天气不错哦!!!', complete: false },
+            { id: 1, text: '天气不错哦!!!', complete: false },
+            { id: 2, text: '出去玩啊!!!', complete: true },
+          ]
+        }
       }
       render() {
-        const a = this.props.data.map(({ id, text, complete }, index) => {
+        // const a = this.state.data.map(({ id, text, complete }, index) => {
+        //   return 
+        //     <TodoItem key={index} id={id} text={text} complete={complete} />
+        // })
+        return (
+          <div>{ 
+            this.state.data.map(({ id, text, complete }, index) => {
           return 
             <TodoItem key={index} id={id} text={text} complete={complete} />
         })
+           }</div>
+        )
+      }
+    }
+
+    // 木偶组件 Dunb Component
+    class TodoItem extends React.Component {
+      constructor(props) {
+        super(props)
+        this.state = {
+          styles: {
+            'title': {
+              paddingLeft: '20px',
+              paddingRight: '50px',
+              posotion: 'relative'
+            },
+            'delete': {
+              marginLeft: '20px',
+              marginRight: '50px'
+            }
+          }
+        }
+      }
+      render() {
         return (
-          <div>{ a }</div>
+          <div className="comment">
+            <div className="content">
+              <span className="author" style={this.state.styles.title} >
+              { this.props.text }
+                <span className={ this.props.complete? 'line': '' } />
+              </span>
+              <span className="author" style={ this.state.styles.title }>
+                { this.props.complete?'已完成':'未完成'}
+              </span>
+              <span className="author">{ this.props.id }</span>
+              <span className="ui blue button" style={this.state.styles.delete}>
+                删除
+              </span>
+            </div>
+          </div>
+        )
+      }
+    }
+
+    class TodoFooter extends React.Component {
+      constructor(props) {
+        super(props)
+        this.state = {
+          styles: {
+            'title': {
+              marginRight: '20px',
+              fontSize: 20
+            },
+            'top': {
+              marginTop: 20
+            }
+          }
+        }
+      }
+      render() {
+        return (
+          <div>
+            <h2 style={this.state.styles.top}>show</h2>
+            <button type="submit"
+              style={this.state.styles.top}
+              className="ui blue button"
+              value="1"
+              ref="all"
+            >
+              全部
+            </button>
+            <button type="submit"
+              style={this.state.styles.top}
+              className="ui blue button"
+              value="2"
+              ref="active"
+            >
+              还未完成
+            </button>
+            <button type="submit"
+              style={this.state.styles.top}
+              className="ui blue button"
+              value="3"
+              ref="complete"
+            >
+              已完成
+            </button>
+          </div>
         )
       }
     }
@@ -62,8 +184,14 @@
     class Todo extends React.Component {
       constructor(props) {
         super(props)
-        this.chooseValue = 1
-        this.data = this.props.data
+        this.state = {
+          chooseValue: 1,
+          data: [
+            { id: 0, text: '天气不错哦!!!', complete: false },
+            { id: 1, text: '天气不错哦!!!', complete: false },
+            { id: 2, text: '出去玩啊!!!', complete: true },
+          ]
+        }
       }
       render() {
         return (
@@ -71,7 +199,7 @@
             <h1>React TodoList</h1>
             <div className="main divider"></div>
             <TodoForm />
-            <TodoList data={data} />
+            <TodoList data={this.state.data} />
             <TodoFooter />
           </div>
         )
@@ -79,7 +207,7 @@
     }
 
     ReactDOM.render(
-      <Todo data={data} />,
+      <Todo />,
       document.getElementById('example')
     )
   </script>
