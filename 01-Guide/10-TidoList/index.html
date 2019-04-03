@@ -66,34 +66,6 @@
       }
     }
 
-    // 智能组件 Smart Component
-    class TodoList extends React.Component {
-      constructor(props) {
-        super(props)
-        this.state = {
-          data: [
-            { id: 0, text: '天气不错哦!!!', complete: false },
-            { id: 1, text: '天气不错哦!!!', complete: false },
-            { id: 2, text: '出去玩啊!!!', complete: true },
-          ]
-        }
-      }
-      render() {
-        // const a = this.state.data.map(({ id, text, complete }, index) => {
-        //   return 
-        //     <TodoItem key={index} id={id} text={text} complete={complete} />
-        // })
-        return (
-          <div>{ 
-            this.state.data.map(({ id, text, complete }, index) => {
-          return 
-            <TodoItem key={index} id={id} text={text} complete={complete} />
-        })
-           }</div>
-        )
-      }
-    }
-
     // 木偶组件 Dunb Component
     class TodoItem extends React.Component {
       constructor(props) {
@@ -132,6 +104,44 @@
         )
       }
     }
+
+    // 智能组件 Smart Component
+    class TodoList extends React.Component {
+      constructor(props) {
+        super(props)
+        this.state = {
+          data: [
+            { id: 0, text: '天气不错哦!!!', complete: false },
+            { id: 1, text: '天气不错哦!!!', complete: false },
+            { id: 2, text: '出去玩啊!!!', complete: true },
+          ]
+        }
+      }
+      render() {
+        // const a = this.state.data.map(({ id, text, complete }, index) => {
+        //   return 
+        //     <TodoItem key={index} id={id} text={text} complete={complete} />
+        // })
+        const data = [
+            { id: 0, text: '天气不错哦!!!', complete: false },
+            { id: 1, text: '天气不错哦!!!', complete: false },
+            { id: 2, text: '出去玩啊!!!', complete: true },
+          ]
+        const list = [1, 2, 3, 4, 5]
+        return (
+          <div>
+            <p>todoList</p>
+            {
+              data.map(({id, text, complete}, index) => {
+                return <TodoItem key={index} id={id} text={text} complete={complete} ></TodoItem>
+              })
+            }
+
+           </div>
+        )
+      }
+    }
+
 
     class TodoFooter extends React.Component {
       constructor(props) {
