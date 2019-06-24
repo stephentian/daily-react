@@ -16,6 +16,13 @@ class XiaoItem extends Component {
   static defaultProps = {
     name: 'stephen'
   }
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.content !== this.props.content) {
+      return true
+    } else {
+      return false
+    }
+  }
   handleClick() {
     this.props.deleteItem(this.props.index)
   }
