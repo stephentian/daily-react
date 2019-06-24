@@ -17,7 +17,7 @@
   // 组件生命周期
   // 1. Mounting(being insterted into the DOM)
   // 2. Updating(being re-rendered)
-  // 3. Ummounting(being removed from the DOM)
+  // 3. Unmounting(being removed from the DOM)
 
   // will 方法发生在事件之前调用
   // did 方法发生在事件之后调用
@@ -30,6 +30,15 @@
   // componentWillUnmount()
   // componentWillReceiveProps(object nextProps)
   // shouldCoumponentUpdate(ObjectNextProps, ObjectNextState)
+
+  // React 声明周期的四大阶段：
+  // 1. Initialization: 初始化阶段
+  // 2. Mounting: 挂载阶段
+  // 3. Updating: 更新阶段
+  // 4. Unmounting: 销毁阶段
+
+  // Mounting
+  // componentWillMount 和 componentDidMount 只在页面刷新时执行一次, render 只要有 state 和 props 变化就会执行
 
     class Hello extends React.Component {
       constructor(props) {
