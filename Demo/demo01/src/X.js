@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import XiaoItem from './Xitem';
+import CoolComponent from './components/CoolComponent'
 
 class Xiao extends Component {
   constructor(props) {
@@ -42,7 +43,8 @@ class Xiao extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="App">
+        <CoolComponent name={'Stephen'}></CoolComponent>
         {/* JSX中 正确的注释写法 */}
         <input value={this.state.inputValue} onChange={this.handleChange.bind(this)}
         // ref 的使用
