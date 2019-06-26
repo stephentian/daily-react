@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import XiaoItem from './Xitem';
 import CoolComponent from './components/CoolComponent'
+import Parent from './components/life/Parent'
 
 class Xiao extends Component {
   constructor(props) {
@@ -63,6 +64,8 @@ class Xiao extends Component {
             })
           }
         </ul>
+        <br/>
+        <Parent />
       </div>
     )
   }
